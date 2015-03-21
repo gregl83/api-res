@@ -16,8 +16,13 @@ function Response(v, u, m) {
     res.uri = val;
   };
 
-  self.message = function(msg) {
-
+  self.message = function(type, description, parameter) {
+    // todo validation
+    res.message.push({
+      "type": type,
+      "description": description,
+      "parameter": parameter
+    });
   };
 
   self.toString = function() {
