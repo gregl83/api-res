@@ -1,17 +1,26 @@
-function Response() {
-  // todo construct
+function Response(v, u, m) {
+  var self = this;
+
+  var res = {"valid": false, "uri": "", "message": []};
+
+  // todo write module
+
+
+  self.valid = function() {
+
+  };
+
+  self.uri = function() {
+
+  };
+
+  self.message = function() {
+
+  };
+
+  self.toString = function() {
+    return JSON.stringify(res);
+  }
 }
-
-// todo write module
-
-Response.prototype.valid = false;
-
-Response.prototype.uri = '';
-
-Response.prototype.message = [];
-
-Response.prototype.toString = function() {
-  return JSON.stringify({valid: this.valid, uri: this.uri, message: this.message});
-};
 
 module.exports = Response;
