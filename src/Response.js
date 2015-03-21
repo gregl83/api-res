@@ -12,6 +12,7 @@ function Response(v, u, m) {
   };
 
   self.uri = function(val) {
+    // todo consider using url.parse to validate
     res.uri = val;
   };
 
