@@ -12,7 +12,7 @@ function Response(v, u, m) {
   };
 
   self.uri = function(val) {
-
+    res.uri = val;
   };
 
   self.message = function(msg) {
