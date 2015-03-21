@@ -6,15 +6,16 @@ function Response(v, u, m) {
   // todo write module
 
 
-  self.valid = function() {
+  self.valid = function(val) {
+    if ("boolean" !== typeof val) throw new Error("valid must be true or false");
+    res.valid = val;
+  };
+
+  self.uri = function(val) {
 
   };
 
-  self.uri = function() {
-
-  };
-
-  self.message = function() {
+  self.message = function(msg) {
 
   };
 
