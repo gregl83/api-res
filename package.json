@@ -12,6 +12,7 @@
     "format",
     "json"
   ],
+  "main": "src/Response",
   "repository": {
     "type": "git",
     "url": "https://github.com/gregl83/api-res.git"
@@ -20,7 +21,12 @@
     "url": "https://github.com/gregl83/api-res/issues"
   },
   "homepage": "https://github.com/gregl83/api-res",
-  "scripts": {},
-  "devDependencies": {},
-  "dependencies": {}
+  "scripts": {
+    "test": "mocha --reporter spec --bail --check-leaks test/"
+  },
+  "devDependencies": {
+    "mocha": "2.2.x"
+  },
+  "dependencies": {},
+  "license": "MIT"
 }
