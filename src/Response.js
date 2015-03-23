@@ -66,7 +66,7 @@ function Response() {
   self.toString = function() {
     if (!isEmptyObject(meta)) res.meta = meta;
     if (!isEmptyObject(links)) res.links = links;
-    if (!errors.length) res.errors = errors;
+    if (!!errors.length) res.errors = errors;
     if (!isEmptyObject(included)) res.included = included;
     return JSON.stringify(res);
   }
