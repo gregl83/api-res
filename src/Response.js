@@ -52,7 +52,6 @@ function Response() {
     if ('object' !== typeof error) return;
     var _error = {};
     Object.keys(error).forEach(function(name) {
-      console.log(name, error[name]);
       if ('undefined' !== typeof errorFormat[name]) {
         if (isType(errorFormat[name], error[name])) _error[name] = error[name];
       }
