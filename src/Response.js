@@ -10,6 +10,11 @@ function Response() {
     return (type === typeof value);
   }
 
+  // check if object is empty
+  function isEmptyObject(object) {
+    return !Object.keys(object).length;
+  }
+
   var res = {
     "data": []
   };
@@ -20,10 +25,10 @@ function Response() {
   var included = {};
 
   // overwrites all existing data on collision
-  self.meta = function(meta) {
-    if ('object' !== typeof meta) return;
-    Object.keys(meta).forEach(function(data, key) {
-      meta[key] = data;
+  self.meta = function(data) {
+    if ('object' !== typeof data) return;
+    Object.keys(data).forEach(function(name) {
+      meta[name] = data[name];
     });
   };
 
@@ -46,22 +51,21 @@ function Response() {
   self.error = function(error) {
     if ('object' !== typeof error) return;
     var _error = {};
-    Object.keys(error).forEach(function(data, key) {
-      if ('undefined' !== typeof errorFormat[key]) {
-        if (isType(errorFormat[key], data)) _error[key] = data;
+    Object.keys(error).forEach(function(name) {
+      console.log(name, error[name]);
+      if ('undefined' !== typeof errorFormat[name]) {
+        if (isType(errorFormat[name], error[name])) _error[name] = error[name];
       }
     });
-    errors.push(_error);
-    self.hasErrors = true;
+    if (!isEmptyObject(_error)) {
+      errors.push(_error);
+      self.hasErrors = true;
+    }
   };
 
   self.include = function(name, include) {
     included[name] = include;
   };
-
-  function isEmptyObject(object) {
-    return !Object.keys(object).length;
-  }
 
   self.toString = function() {
     if (!isEmptyObject(meta)) res.meta = meta;
