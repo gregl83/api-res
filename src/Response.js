@@ -1,9 +1,14 @@
 function Response() {
   var self = this;
 
+  // public object properties
   self.hasErrors = false;
 
-  // todo write module based on the jsonapi.org specification
+  // check data type
+  function isType(type, value) {
+    if ('array' ===  type) return Array.isArray(value);
+    return (type === typeof value);
+  }
 
   var res = {
     "data": []
@@ -14,16 +19,39 @@ function Response() {
   var errors = [];
   var included = {};
 
-  self.meta = function(name, meta) {
-    meta[name] = meta;
+  // overwrites all existing data on collision
+  self.meta = function(meta) {
+    if ('object' !== typeof meta) return;
+    Object.keys(meta).forEach(function(data, key) {
+      meta[key] = data;
+    });
   };
 
   self.link = function(name, link) {
     links[name] = link;
   };
 
+  var errorFormat = {
+    "id": 'string',
+    "href": 'string',
+    "status": 'number',
+    "code": 'string',
+    "title": 'string',
+    "detail": 'string',
+    "links": 'array',
+    "paths": 'array'
+  };
+
+  // error data that fails type check or invalid error is dropped
   self.error = function(error) {
-    errors.push(error);
+    if ('object' !== typeof error) return;
+    var _error = {};
+    Object.keys(error).forEach(function(data, key) {
+      if ('undefined' !== typeof errorFormat[key]) {
+        if (isType(errorFormat[key], data)) _error[key] = data;
+      }
+    });
+    errors.push(_error);
     self.hasErrors = true;
   };
 
