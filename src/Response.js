@@ -74,12 +74,12 @@ function Response() {
     if (!isEmptyObject(included)) res.included = included;
   }
 
-  self.o = self.toObject = function() {
+  self.toJSON = function() {
     buildResponse();
     return res;
   };
 
-  self.s = self.toString = function() {
+  self.toString = function() {
     buildResponse();
     return JSON.stringify(res);
   }
