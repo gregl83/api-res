@@ -3,8 +3,17 @@ function Response(v, u, m) {
 
   var res = {"valid": false, "uri": "", "message": []};
 
-  // todo write module
+  // todo write module based on the jsonapi.org specification
 
+  /*
+  {
+    "meta"
+    "links"
+    "data"
+    "errors"
+    "included"
+  }
+   */
 
   self.valid = function(val) {
     if ("boolean" !== typeof val) throw new Error("valid must be true or false");
