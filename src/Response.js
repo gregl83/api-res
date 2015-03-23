@@ -67,11 +67,20 @@ function Response() {
     included[name] = include;
   };
 
-  self.toString = function() {
+  function buildResponse() {
     if (!isEmptyObject(meta)) res.meta = meta;
     if (!isEmptyObject(links)) res.links = links;
     if (!!errors.length) res.errors = errors;
     if (!isEmptyObject(included)) res.included = included;
+  }
+
+  self.o = self.toObject = function() {
+    buildResponse();
+    return res;
+  };
+
+  self.s = self.toString = function() {
+    buildResponse();
     return JSON.stringify(res);
   }
 }
