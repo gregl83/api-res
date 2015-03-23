@@ -31,15 +31,6 @@ function Response() {
     included[name] = include;
   };
 
-  self.message = function(type, description, parameter) {
-    // todo validation
-    res.message.push({
-      "type": type,
-      "description": description,
-      "parameter": parameter
-    });
-  };
-
   function isEmptyObject(object) {
     return !Object.keys(object).length;
   }
