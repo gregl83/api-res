@@ -36,6 +36,11 @@ function Response() {
     links[name] = link;
   };
 
+  // push to data array
+  self.data = function(data) {
+    res.data.push(data);
+  };
+
   var errorFormat = {
     "id": 'string',
     "href": 'string',
