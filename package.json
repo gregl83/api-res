@@ -25,7 +25,9 @@
     "test": "mocha --reporter spec --bail --check-leaks test/"
   },
   "devDependencies": {
-    "mocha": "2.2.x"
+    "mocha": "2.2.x",
+    "should": "5.2.x",
+    "sinon": "1.14.x"
   },
   "dependencies": {},
   "license": "MIT"

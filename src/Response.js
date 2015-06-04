@@ -1,5 +1,9 @@
-function Response() {
+// todo implement resource object
+
+function Response(options) {
   var self = this;
+
+  if ('undefined' === typeof options) options = {};
 
   // public object properties
   self.hasErrors = false;
@@ -15,10 +19,10 @@ function Response() {
     return !Object.keys(object).length;
   }
 
-  var res = {
-    "data": []
-  };
+  // private response object
+  var res = {};
 
+  var data = (options.collection) ? [] : null;
   var meta = {};
   var links = {};
   var errors = [];
@@ -36,9 +40,10 @@ function Response() {
     links[name] = link;
   };
 
-  // push to data array
-  self.data = function(data) {
-    res.data.push(data);
+  // push to data if collection or set to data if single object
+  self.data = function(val) {
+    if (options.collection) data.push(val);
+    else data = val;
   };
 
   var errorFormat = {
@@ -72,6 +77,7 @@ function Response() {
   };
 
   self.toJSON = function() {
+    if (!errors.length) res.data = data;
     if (!isEmptyObject(meta)) res.meta = meta;
     if (!isEmptyObject(links)) res.links = links;
     if (!!errors.length) res.errors = errors;
