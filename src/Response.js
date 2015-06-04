@@ -77,10 +77,10 @@ function Response(options) {
   };
 
   self.toJSON = function() {
-    if (!errors.length) res.data = data;
+    if (!self.hasErrors) res.data = data;
     if (!isEmptyObject(meta)) res.meta = meta;
     if (!isEmptyObject(links)) res.links = links;
-    if (!!errors.length) res.errors = errors;
+    if (self.hasErrors) res.errors = errors;
     if (!isEmptyObject(included)) res.included = included;
     return res;
   };
