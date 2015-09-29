@@ -31,19 +31,26 @@ function Response(options) {
   // overwrites all existing data on collision
   self.meta = function(data) {
     if ('object' !== typeof data) return;
+
     Object.keys(data).forEach(function(name) {
       meta[name] = data[name];
     });
+
+    return self;
   };
 
   self.link = function(name, link) {
     links[name] = link;
+
+    return self;
   };
 
   // push to data if collection or set to data if single object
   self.data = function(val) {
     if (options.collection) data.push(val);
     else data = val;
+
+    return self;
   };
 
   var errorFormat = {
@@ -61,19 +68,25 @@ function Response(options) {
   self.error = function(error) {
     if ('object' !== typeof error) return;
     var _error = {};
+
     Object.keys(error).forEach(function(name) {
       if ('undefined' !== typeof errorFormat[name]) {
         if (isType(errorFormat[name], error[name])) _error[name] = error[name];
       }
     });
+
     if (!isEmptyObject(_error)) {
       errors.push(_error);
       self.hasErrors = true;
     }
+
+    return self;
   };
 
   self.include = function(name, include) {
     included[name] = include;
+
+    return self;
   };
 
   self.toJSON = function() {
